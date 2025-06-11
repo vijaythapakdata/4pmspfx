@@ -5,4 +5,8 @@ export interface ISharePointFormState{
     Salary:any;
     Address:string|any;
     Score:any;
+    Manager:any[];
+    ManagerId:any[];
+    AdminId:any;
+    Admin:any;
 }
