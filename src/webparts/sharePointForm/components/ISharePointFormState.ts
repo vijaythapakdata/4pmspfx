@@ -9,4 +9,8 @@ export interface ISharePointFormState{
     ManagerId:any[];
     AdminId:any;
     Admin:any;
+    City:any;
+    Department:string;
+    Gender:string;
+    Skills:any;
 }

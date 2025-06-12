@@ -7,8 +7,9 @@ import "@pnp/sp/webs";
 import "@pnp/sp/items";
 import "@pnp/sp/lists";
 import { Dialog } from '@microsoft/sp-dialog';
-import { DefaultButton, PrimaryButton, Slider, TextField } from '@fluentui/react';
+import { ChoiceGroup, DefaultButton, Dropdown, PrimaryButton, Slider, TextField } from '@fluentui/react';
 import {PeoplePicker,PrincipalType} from "@pnp/spfx-controls-react/lib/PeoplePicker";
+import { __metadata } from 'tslib';
 
 export default class SharePointForm extends React.Component<ISharePointFormProps,ISharePointFormState> {
   constructor(props:any){
@@ -23,7 +24,11 @@ export default class SharePointForm extends React.Component<ISharePointFormProps
       Manager:[],
       ManagerId:[],
       AdminId:0,
-      Admin:""
+      Admin:"",
+      Gender:"",
+      Department:"",
+      City:"",
+      Skills:[]
     }
   }
   //create item
@@ -39,7 +44,17 @@ const item=await list.items.add({
   Score:this.state.Score,
   Address:this.state.Address,
   AdminId:this.state.AdminId,
-  ManagerId:this.state.ManagerId.length>1?{results:this.state.ManagerId}:this.state.ManagerId[0]||null
+  // ManagerId:{results:this.state.ManagerId},
+  ManagerId:{
+    __metadata:{
+      type:"Collection(Edm.Int32)"
+    },
+    results:this.state.ManagerId
+  },
+  Gender:this.state.Gender,
+  // Skills:{results:this.state.Skills},
+  Department:this.state.Department,
+  CityId:this.state.City
 })
 Dialog.alert("Item created successfully");
 console.log(item);
@@ -78,6 +93,11 @@ Dialog.alert("Item failed successfully");
   private handleChange=(field:keyof ISharePointFormState,value:string|boolean|number):void=>{
     this.setState({[field]:value}as unknown as Pick<ISharePointFormState,keyof ISharePointFormState>);
   }
+  //skills change
+  // private onSkillsChange=(event:React.FormEvent<HTMLInputElement>,options:IDropdownOption):void=>{
+  //   const selectedKey=options.selected?[...this.state.Skills,options.key as string]:this.state.Skills.filter((key:any)=>key!==options.key);
+  //   this.setState({Skills:selectedKey})
+  // }
 
   //Managers
   private _getManagers=(items:any):void=>{
@@ -165,6 +185,34 @@ Dialog.alert("Item failed successfully");
  required={false}
  resolveDelay={1000}
  />
+ <ChoiceGroup
+ options={this.props.genderOptions}
+ selectedKey={this.state.Gender}
+ onChange={(_,options)=>this.handleChange("Gender",options?.key as string )}
+ label='Gender'
+ />
+ <Dropdown
+ options={this.props.departmentOptions}
+selectedKey={this.state.Department}
+ onChange={(_,options)=>this.handleChange("Department",options?.key as string )}
+ label='Department'
+ placeholder='--select--'
+ />
+ <Dropdown
+ options={this.props.cityOptions}
+ selectedKey={this.state.City}
+ onChange={(_,options)=>this.handleChange("City",options?.key as string )}
+ label='City'
+ />
+  {/* <Dropdown
+ options={this.props.skillsOptions}
+ defaultSelectedKeys={this.state.Skills}
+//  onChange={(_,options)=>this.handleChange("City",options?.key as string )}
+onChange={this.onSkillsChange}
+ label='Skills'
+ placeholder='--select skills--'
+ multiSelect
+ /> */}
  <br/>
  <PrimaryButton text='Save' onClick={()=>this.createItem()} iconProps={{iconName:'save'}}/>&nbsp;&nbsp;&nbsp;
   <DefaultButton text='Reset' onClick={()=>this.resetForm()} iconProps={{iconName:'reset'}}/>

@@ -4,4 +4,8 @@ export interface ISharePointFormProps {
  ListName:string; //List Name dynamically
  context:WebPartContext;
  siteurl:string;
+ genderOptions:any;
+ departmentOptions:any;
+ skillsOptions:any;
+ cityOptions:any;
 }
