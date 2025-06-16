@@ -1,4 +1,4 @@
-export interface ISharePointFormState{
+export interface IFunctionalFormState {
     Name:string;
     EmailAddress:string;
     Age:any;
@@ -9,10 +9,4 @@ export interface ISharePointFormState{
     ManagerId:any[];
     AdminId:any;
     Admin:any;
-    City:any;
-    Department:string;
-    Gender:string;
-    Skills:any;
-    DOB:any;
-    Attachments:any[];
 }

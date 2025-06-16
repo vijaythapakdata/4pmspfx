@@ -25,6 +25,14 @@
           "manifest": "./src/webparts/sharePointForm/SharePointFormWebPart.manifest.json"
         }
       ]
+    },
+    "functional-form-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/functionalForm/FunctionalFormWebPart.js",
+          "manifest": "./src/webparts/functionalForm/FunctionalFormWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -32,6 +40,7 @@
     "SampleformWebPartStrings": "lib/webparts/sampleform/loc/{locale}.js",
     "SpfxformWebPartStrings": "lib/webparts/spfxform/loc/{locale}.js",
     "SharePointFormWebPartStrings": "lib/webparts/sharePointForm/loc/{locale}.js",
-    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js"
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
+    "FunctionalFormWebPartStrings": "lib/webparts/functionalForm/loc/{locale}.js"
   }
 }
